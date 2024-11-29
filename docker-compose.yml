@@ -20,3 +20,13 @@ services:
     image: redis:alpine  # Use a lightweight Redis image
     ports:
       - "6379:6379"  # Map Redis port 6379 to host
+  db:
+   image: postgres 
+   environment:
+    - POSTGRES_PASSWORD=password 
+    - POSTGRES_DB=myapp 
+   volumes:
+    - postgres_data:/var/lib/postgressql/data
+
+volumes:
+  postgres_data:
