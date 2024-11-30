@@ -10,12 +10,12 @@ from resources.tag import blp as TagBlueprint
 from models import StoreModel, ItemModel, UserModel
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate 
-from dotenv import load_dotenv
+
 
 
 def create_app(db_url=None):
     app = Flask(__name__)
-    load_dotenv()
+    
     app.config['DEBUG'] = True
     app.config['FLASK_ENV'] = 'development'
     app.config["PROPAGATE_EXCEPTIONS"] = True
