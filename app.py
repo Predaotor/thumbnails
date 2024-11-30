@@ -10,10 +10,12 @@ from resources.tag import blp as TagBlueprint
 from models import StoreModel, ItemModel, UserModel
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate 
+from dotenv import load_dotenv
 
 
 def create_app(db_url=None):
     app = Flask(__name__)
+    load_dotenv()
     app.config['DEBUG'] = True
     app.config['FLASK_ENV'] = 'development'
     app.config["PROPAGATE_EXCEPTIONS"] = True
@@ -23,7 +25,7 @@ def create_app(db_url=None):
     app.config["OPENAPI_URL_PREFIX"] = "/"
     app.config["OPENAPI_SWAGGER_UI_PATH"] = "/swagger-ui"
     app.config["OPENAPI_SWAGGER_UI_URL"] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
-    app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL", "sqlite:///data.db")
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # Corrected from SQLALCHEMY_TRACK_NOTIFICATIONS
     app.config["JWT_SECRET_KEY"]="0e989c56390d1163901ab6e1944c3da3a52ec2755f7e34505e3dc9d62eba9eb6"
     migrate=Migrate(app, db)
